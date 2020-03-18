@@ -6,6 +6,10 @@
   </head>
 
   <body>
+    <ul>
+      <li><a href = "{{ url_for('reviews_index') }}">List reviews</a></li>
+      <li><a href = "{{ url_for('reviews_form') }}">Add a review</a></li>
+    </ul>
     {% block body %}
       <p>
         Content.

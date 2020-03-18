@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<form method="POST" action="{{ url_for('reviews_create') }}">
+  <label for="author">Author</label>
+  <input type="text" id="author" name="author" /><br>
+
+  <label for="book">Book</label>
+  <input type="text" id="book" name="book" /><br>
+
+  <label for="review">Review</label>
+  <textarea id="review" name="review" rows="4" cols="50"></textarea><br>
+
+  <input type="radio" id="1" name="stars" value=1/>
+  <label for="1">1</label> 
+
+  <input type="radio" id="2" name="stars" value=2/>
+  <label for="2">2</label>
+
+  <input type="radio" id="3" name="stars" value=3/>
+  <label for="3">3</label>
+
+  <input type="radio" id="4" name="stars" value=4/>
+  <label for="4">4</label>
+  
+  <input type = "radio" id = "5" name = "stars" value = 5/>
+  <label for="5">5</label><br><br>
+
+  <input type = "submit" value = "Add a new review"/>
+</form>
+{% endblock %}
