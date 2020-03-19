@@ -13,6 +13,14 @@ def reviews_index():
 def reviews_form():
     return render_template("reviews/new.html")
 
+@app.route("/reviews/<review_id>/", methods=["GET"])
+def reviews_modify(review_id):
+    r = db.session.query(Author.name, Book.book_name, Review.review).\
+            filter(Review.book_id == Book.id).\
+            filter(Book.author_id == Author.id).\
+            group_by(Review.id).all()
+    return render_template("reviews/modify.html", review = r)
+
 @app.route("/reviews/", methods=["POST"])
 def reviews_create():
 
