@@ -7,6 +7,7 @@
       <th>Book</th>
       <th>Review</th>
       <th>Stars</th>
+      <th></th>
     </tr>
     {% for review in reviews %}
     <tr>
@@ -15,8 +16,8 @@
       <td>{{ review.review }}</td>
       <td>{{ review.stars }}</td>
       <td>
-        <form method="GET" action="{{ url_for('reviews_modify', review_id = review.id) }}">
-          <input type="submit" value="Modify"/>
+        <form method="POST" action="{{ url_for('reviews_modify', review_id=review.id) }}">
+          <input type="submit" value="Delete Review"/>
         </form>
       </td>
     </tr>

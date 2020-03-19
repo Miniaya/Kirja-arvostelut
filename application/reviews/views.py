@@ -4,7 +4,7 @@ from application.reviews.models import Review, Author, Book
 
 @app.route("/reviews", methods=["GET"])
 def reviews_index():
-    return render_template("reviews/list.html", reviews = db.session.query(Author.name, Book.book_name, Review.review, Review.stars).\
+    return render_template("reviews/list.html", reviews = db.session.query(Author.name, Book.book_name, Review.review, Review.stars, Review.id).\
             filter(Review.book_id == Book.id).\
             filter(Book.author_id == Author.id).\
             group_by(Review.id).all())
@@ -13,13 +13,13 @@ def reviews_index():
 def reviews_form():
     return render_template("reviews/new.html")
 
-@app.route("/reviews/<review_id>/", methods=["GET"])
+@app.route("/reviews/<review_id>/", methods=["POST"])
 def reviews_modify(review_id):
-    r = db.session.query(Author.name, Book.book_name, Review.review).\
-            filter(Review.book_id == Book.id).\
-            filter(Book.author_id == Author.id).\
-            group_by(Review.id).all()
-    return render_template("reviews/modify.html", review = r)
+    r = Review.query.get(review_id)
+    r.review = ""
+    db.session().commit()
+
+    return redirect(url_for("reviews_index"))
 
 @app.route("/reviews/", methods=["POST"])
 def reviews_create():
