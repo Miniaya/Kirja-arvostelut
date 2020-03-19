@@ -13,10 +13,16 @@ def reviews_index():
 def reviews_form():
     return render_template("reviews/new.html")
 
-@app.route("/reviews/<review_id>/", methods=["POST"])
+@app.route("/reviews/<review_id>/", methods=["GET"])
 def reviews_modify(review_id):
     r = Review.query.get(review_id)
-    r.review = ""
+
+    return render_template("reviews/modify.html", review = r)
+
+@app.route("/reviews/modify/<review_id>/", methods=["POST"])
+def reviews_save_changes(review_id):
+    r = Review.query.get(review_id)
+    r.review = request.form.get("review")
     db.session().commit()
 
     return redirect(url_for("reviews_index"))
