@@ -9,7 +9,7 @@ class Review(db.Model):
     review = db.Column(db.String(144), nullable = False)
     stars = db.Column(db.Integer, nullable = False)
 
-    def __init__(self, review, stars, book_id):
+    def __init__(self, book_id, review, stars):
         self.user_id = 1
         self.book_id = book_id
         self.review = review
@@ -25,8 +25,8 @@ class Author(db.Model):
 class Book(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     author_id = db.Column(db.Integer, nullable = False)
-    name = db.Column(db.String(144), nullable = False)
+    book_name = db.Column(db.String(144), nullable = False)
 
     def __init__(self, name, author_id):
-        self.name = name
+        self.book_name = name
         self.author_id = author_id

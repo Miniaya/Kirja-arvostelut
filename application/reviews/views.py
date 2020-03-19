@@ -4,7 +4,10 @@ from application.reviews.models import Review, Author, Book
 
 @app.route("/reviews", methods=["GET"])
 def reviews_index():
-    return render_template("reviews/list.html", reviews = Review.query.all())
+    return render_template("reviews/list.html", reviews = db.session.query(Author.name, Book.book_name, Review.review, Review.stars).\
+            filter(Review.book_id == Book.id).\
+            filter(Book.author_id == Author.id).\
+            group_by(Review.id).all())
 
 @app.route("/reviews/new/")
 def reviews_form():
@@ -13,19 +16,19 @@ def reviews_form():
 @app.route("/reviews/", methods=["POST"])
 def reviews_create():
 
-    if Author.query.get(request.form.get("author")) is None:
+    if db.session.query(Author).filter(Author.name == request.form.get("author")).scalar() is None:
         a = Author(request.form.get("author"))
         db.session.add(a)
         db.session.commit()
 
-    if Book.query.get(request.form.get("book")) is None:
-        a = Author.query.get(request.form.get("author"))
-        b = Book(request.form.get("book"), a.id)
+    if db.session.query(Book).filter(Book.book_name == request.form.get("book")).scalar() is None:
+        a = db.session.query(Author.id).filter(Author.name == request.form.get("author")).scalar()
+        b = Book(request.form.get("book"), a)
         db.session.add(b)
         db.session.commit()
 
-    b = Book.query.get(request.form.get("book"))
-    r = Review(request.form.get("review"), request.form.get("stars"), b.id)
+    b = db.session.query(Book.id).filter(Book.book_name == request.form.get("book")).scalar()
+    r = Review(b, request.form.get("review"), request.form.get("stars"))
 
     db.session().add(r)
     db.session().commit()
