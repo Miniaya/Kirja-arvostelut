@@ -13,4 +13,8 @@ järjestyksessä niille annettujen arvosanojen perusteella. (Mahdollista myös l
 - Arvostelujen muokkaaminen (Nappi, toiminnallisuus ym valmis, mutta nappi ei toimi)
 
 [Sovellus Herokussa](https://kirja-arvostelut.herokuapp.com/)
+
 [Tietokantakaavio](https://dbdiagram.io/d/5e6aa7b34495b02c3b882e26)
+
+> Käyttäjänä pystyn luomaan uuden arvostelun, tarkastelemaan aiemmin kirjoittamiani arvosteluja 
+> sekä muokkaamaan arvosteluani.
