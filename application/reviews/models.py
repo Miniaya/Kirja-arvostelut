@@ -4,13 +4,12 @@ class Review(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     date_created = db.Column(db.DateTime, default = db.func.current_timestamp())
 
-    user_id = db.Column(db.Integer, nullable = False)
+    account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable = False)
     book_id = db.Column(db.Integer, nullable = False)
     review = db.Column(db.String(144), nullable = False)
     stars = db.Column(db.Integer, nullable = False)
 
     def __init__(self, book_id, review, stars):
-        self.user_id = 1
         self.book_id = book_id
         self.review = review
         self.stars = stars
