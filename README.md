@@ -14,7 +14,7 @@ järjestyksessä niille annettujen arvosanojen perusteella. (Mahdollista myös l
 
 [Sovellus Herokussa](https://kirja-arvostelut.herokuapp.com/)
 
-[Tietokantakaavio](https://github.com/Miniaya/Kirja-arvostelut/blob/master/documentation/tietokantakaavio.png)
+[Tietokantakaavio](https://github.com/Miniaya/Kirja-arvostelut/blob/master/documentation/tietokantakaavio(uusin).png)
 
 [User storyt](https://github.com/Miniaya/Kirja-arvostelut/blob/master/documentation/userstoryt.md)
 
