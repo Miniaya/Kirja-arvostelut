@@ -17,3 +17,7 @@ järjestyksessä niille annettujen arvosanojen perusteella. (Mahdollista myös l
 [Tietokantakaavio](https://github.com/Miniaya/Kirja-arvostelut/blob/master/documentation/tietokantakaavio.png)
 
 [User storyt](https://github.com/Miniaya/Kirja-arvostelut/blob/master/documentation/userstoryt.md)
+
+### Testitunnukset:
+Username: teemu
+Password: testi
