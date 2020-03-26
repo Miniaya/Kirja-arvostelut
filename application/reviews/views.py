@@ -12,6 +12,14 @@ def reviews_index():
             filter(Book.author_id == Author.id).\
             group_by(Review.id).all())
 
+@app.route("/reviews/delete/<review_id>", methods=["POST"])
+@login_required
+def reviews_delete(review_id):
+    Review.query.filter_by(id=review_id).delete()
+    db.session.commit()
+
+    return redirect(url_for("reviews_index"))
+
 @app.route("/reviews/new/")
 @login_required
 def reviews_form():

@@ -20,6 +20,11 @@
           <input type="submit" value="Modify"/>
         </form>
       </td>
+      <td>
+        <form method="POST" action="{{ url_for('reviews_delete', review_id=review.id) }}">
+          <input type="submit" value="Delete"/>
+        </form>
+      </td>
     </tr>
     {% endfor %}
   </table>
