@@ -1,31 +1,16 @@
 {% extends "layout.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 
 {% block body %}
 {{ error }}
 <form method = "POST" action = "{{ url_for('auth_login') }}" >
-    <table>
-        <tr>
-            <td>
-                {{ form.username.label }}
-            </td>
-            <td>
-                {{ form.username }}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                {{ form.password.label }}
-            </td>
-            <td>
-                {{ form.password }}
-            </td>
-        </tr>
-        <tr>
-            <td colspan="10">
-                <input type = "submit" value = "Login" />
-            </td>
-        </tr>
-    </table>
+    <div>
+        {{ wtf.form_field(form.username, class="form-control") }}
+    </div>
+    <div>
+        {{ wtf.form_field(form.password, class="form-control") }}
+    </div>
+    <input type = "submit" class="btn btn-primary" value = "Login" />
 </form>
 
 {% endblock %}
