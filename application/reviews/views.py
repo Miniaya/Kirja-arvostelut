@@ -3,14 +3,25 @@ from flask_login import login_required, current_user
 
 from application import app, db
 from application.reviews.models import Review, Author, Book
-from application.reviews.forms import ReviewForm
+from application.reviews.forms import ReviewForm, SearchForm
+
+@app.route("/frontpage", methods=["GET"])
+def reviews_front():
+    return render_template("reviews/list.html", reviews = Review.get_all_reviews(), show = 3)
+
+@app.route("/reviews/search", methods=["POST", "GET"])
+def reviews_search():
+    if request.method == "GET":
+        return render_template("reviews/list.html", show = 1, form = SearchForm())
+
+    form = SearchForm(request.form)
+
+    return render_template("reviews/list.html", reviews = Review.find_by_author(form.author.data))
 
 @app.route("/reviews", methods=["GET"])
+@login_required
 def reviews_index():
-    return render_template("reviews/list.html", reviews = db.session.query(Author.name, Book.book_name, Review.review, Review.stars, Review.id).\
-            filter(Review.book_id == Book.id).\
-            filter(Book.author_id == Author.id).\
-            group_by(Review.id).all())
+    return render_template("reviews/list.html", show = 2, reviews = Review.get_review(current_user.id))
 
 @app.route("/reviews/delete/<review_id>", methods=["POST"])
 @login_required
@@ -25,17 +36,14 @@ def reviews_delete(review_id):
 def reviews_form():
     return render_template("reviews/new.html", form = ReviewForm())
 
-@app.route("/reviews/<review_id>/", methods=["GET"])
+@app.route("/reviews/<review_id>/", methods=["GET", "POST"])
 @login_required
 def reviews_modify(review_id):
     r = Review.query.get(review_id)
 
-    return render_template("reviews/modify.html", review = r)
+    if request.method == "GET":
+        return render_template("reviews/modify.html", review = r)
 
-@app.route("/reviews/modify/<review_id>/", methods=["POST"])
-@login_required
-def reviews_save_changes(review_id):
-    r = Review.query.get(review_id)
     r.review = request.form.get("review")
     db.session().commit()
 

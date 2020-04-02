@@ -1,32 +1,56 @@
 {% extends "layout.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 
 {% block body %}
-  <table>
-    <tr>
-      <th>Author</th>
-      <th>Book</th>
-      <th>Review</th>
-      <th>Stars</th>
-      <th></th>
-    </tr>
+  {% if show == 1 %}
+  <form method="POST" action="{{ url_for('reviews_search') }}">
+    <div class="form-group">
+      {{ wtf.form_field(form.author, class="form-control", placeholder="Filter by author (Not working correctly)") }}
+    </div>
+  </form>
+  </div>
+  {% endif %}
+  <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-primary rounded box-shadow">
+    {% if show == 1 %}
+    <h3 class="mb-0 text-white lh-100">Results for search:</h3>
+    {% elif show == 2 %}
+    <h3 class="mb-0 text-white lh-100">Own reviews</h3>
+    {% elif show == 3 %}
+    <h3 class="mb-0 text-white lh-100">Recent reviews</h3>
+    {% endif %}
+  </div>
+  {% if reviews is defined %}
     {% for review in reviews %}
-    <tr>
-      <td>{{ review.name }}</td>
-      <td>{{ review.book_name }}</td>
-      <td>{{ review.review }}</td>
-      <td>{{ review.stars }}</td>
-      <td>
-        <form method="GET" action="{{ url_for('reviews_modify', review_id=review.id) }}">
-          <input type="submit" value="Modify"/>
-        </form>
-      </td>
-      <td>
-        <form method="POST" action="{{ url_for('reviews_delete', review_id=review.id) }}">
-          <input type="submit" value="Delete"/>
-        </form>
-      </td>
-    </tr>
+    <div class="my-3 p-3 bg-white rounded box-shadow">
+      <div class="d-flex justify-content-between align-items-center w-10">
+        <h5 class="pb-2 mb-0">{{ review.author }}  -  {{ review.book }}</h5>
+        {% if show == 2 %}
+        <div class="btn-group btn-group-sm" role="group" arial-label="Basic example">
+          <form method="GET" action="{{ url_for('reviews_modify', review_id=review.id) }}">
+            <input type="submit" class="btn btn-secondary btn-sm" value="Modify"/>
+          </form>
+          <form method="POST" action="{{ url_for('reviews_delete', review_id=review.id) }}">
+            <input type="submit" class="btn btn-secondary btn-sm" value="Delete"/>
+          </form>
+        </div>
+        {% endif %}
+      </div>
+      <div class="media-body pb-3 mb-0 lh-125 border-top border-gary pt-3">
+        <p>{{ review.review }}</p>
+        <strong class="d-block text-left mt-3">Stars: {{ review.stars }}</strong>
+        <div class="d-flex justify-content-between align-items-center w-10">
+          <div>
+            <small class="d-block text-right">@{{ review.username }}</small>
+          </div>
+          <div>
+            <small class="d-block text-left">{{ review.date }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
     {% endfor %}
-  </table>
+  {% else %}
+    <p>No reviews</p>
+  {% endif %}
 
 {% endblock %}

@@ -1,14 +1,14 @@
 {% extends "layout.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 
 {% block body %}
 
-{{ review }}
-<form method="POST" action="{{ url_for('reviews_save_changes', review_id=review.id) }}">
-
+<form method="POST" action="{{ url_for('reviews_modify', review_id=review.id) }}">
+  <div class="form-group">
     <label for="review">Review</label>
-    <textarea id="review" name="review" rows="4" cols="50">{{ review.review }}</textarea><br>
-
-    <input type="submit" value="Save changes" />
-  </form>
+    <textarea class="form-control" id="review" name="review" rows="4" cols="50">{{ review.review }}</textarea>
+  </div>
+  <input type="submit" class="btn btn-primary" value="Save" />
+</form>
 
   {% endblock %}

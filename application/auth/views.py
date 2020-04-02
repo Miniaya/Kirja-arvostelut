@@ -33,6 +33,9 @@ def auth_sign_in():
 
     form = SignInForm(request.form)
 
+    if not form.validate():
+        return render_template("auth/signinform.html", form = form)
+
     user = User.query.filter_by(username = form.username.data).first()
 
     if user:

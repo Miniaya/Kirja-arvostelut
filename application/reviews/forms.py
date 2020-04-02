@@ -9,3 +9,9 @@ class ReviewForm(FlaskForm):
 
     class Meta:
         csrf = False
+
+class SearchForm(FlaskForm):
+    author = StringField("Author")
+
+    class Meta:
+        csrf = False
