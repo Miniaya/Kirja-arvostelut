@@ -11,6 +11,8 @@ järjestyksessä niille annettujen arvosanojen perusteella. (Mahdollista myös l
 - Uuden arvostelun lisääminen
 - Arvostelujen listaaminen
 - Kirjallisen arvostelun muokkaaminen
+- Listaus viimeisimmistä arvosteluista (kaikki käyttäjät)
+- Listaus omista arvosteluista
 
 [Sovellus Herokussa](https://kirja-arvostelut.herokuapp.com/)
 
@@ -20,4 +22,5 @@ järjestyksessä niille annettujen arvosanojen perusteella. (Mahdollista myös l
 
 ### Testitunnukset:
 Username: teemu
+
 Password: testi
