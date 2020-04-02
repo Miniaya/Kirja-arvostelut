@@ -22,7 +22,7 @@ class Review(Base):
                     "LEFT JOIN Author ON Book.author_id = Author.id "
                     "LEFT JOIN Account ON Review.account_id = Account.id "
                     "WHERE Review.account_id = :id "
-                    "GROUP BY Review.id "
+                    "GROUP BY Review.id, Author.name "
                     "ORDER BY Review.date_modified DESC").params(id = id)
         res = db.engine.execute(stmt)
 
@@ -38,7 +38,7 @@ class Review(Base):
                     "FROM Review LEFT JOIN Book ON Review.book_id = Book.id "
                     "LEFT JOIN Author ON Book.author_id = Author.id "
                     "LEFT JOIN Account ON Review.account_id = Account.id "
-                    "GROUP BY Review.id "
+                    "GROUP BY Review.id, Author.name "
                     "ORDER BY Review.date_modified DESC")
         res = db.engine.execute(stmt)
 
