@@ -47,4 +47,7 @@ def auth_sign_in():
     db.session.add(a)
     db.session.commit()
 
-    return render_template("auth/loginform.html", form = LoginForm())
+    user = User.query.filter_by(username = form.username.data, password = form.password.data).first()
+    login_user(user)
+
+    return redirect(url_for("reviews_front"))

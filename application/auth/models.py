@@ -5,9 +5,9 @@ class User(Base):
 
     __tablename__ = "account"
 
-    name = db.Column(db.String(144), nullable = False)
-    username = db.Column(db.String(144), nullable = False)
-    password = db.Column(db.String(144), nullable = False)
+    name = db.Column(db.String(100), nullable = False)
+    username = db.Column(db.String(24), nullable = False)
+    password = db.Column(db.String(16), nullable = False)
 
     reviews = db.relationship("Review", backref='account', lazy = True)
 
