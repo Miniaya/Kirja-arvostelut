@@ -5,7 +5,7 @@
   {% if show == 1 %}
   <form method="POST" action="{{ url_for('reviews_search') }}">
     <div class="form-group">
-      {{ wtf.form_field(form.author, class="form-control", placeholder="Filter by author (Not working correctly)") }}
+      {{ wtf.form_field(form.author, class="form-control", placeholder="Filter by author") }}
     </div>
   </form>
   </div>
@@ -19,7 +19,7 @@
     <h3 class="mb-0 text-white lh-100">Recent reviews</h3>
     {% endif %}
   </div>
-  {% if reviews is defined %}
+  {% if reviews is defined and reviews|length > 0 %}
     {% for review in reviews %}
     <div class="my-3 p-3 bg-white rounded box-shadow">
       <div class="d-flex justify-content-between align-items-center w-10">

@@ -14,9 +14,9 @@ def reviews_search():
     if request.method == "GET":
         return render_template("reviews/list.html", show = 1, form = SearchForm())
 
-    form = SearchForm(request.form)
+    r = Review.find_by_author(request.form.get("author"))
 
-    return render_template("reviews/list.html", reviews = Review.find_by_author(form.author.data))
+    return render_template("reviews/list.html", show = 1, reviews = r, form = SearchForm())
 
 @app.route("/reviews", methods=["GET"])
 @login_required
