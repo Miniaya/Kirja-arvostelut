@@ -13,11 +13,14 @@
     </div>
   </div>
   <div class="form-group">
-    {{ wtf.form_field(form.review, class="form-control", placeholder="Write your review here...") }}
+    {{ wtf.form_field(form.review, id="review", class="form-control", placeholder="Write your review here...") }}
   </div>
+  <figcaption id="charactersRemaining" class="figure-caption text-right">400</figcaption>
   <div class="form-group">
-    {{ wtf.form_field(form.star, class="form-control", placeholder="...") }}
+    {{ wtf.form_field(form.star, class="form-control") }}
   </div>
   <input type="submit" class="btn btn-primary" value="Add a new review" />
 </form>
+<script src="{{url_for('static', filename='textcounter.js')}}"></script>
+
 {% endblock %}
