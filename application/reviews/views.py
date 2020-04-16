@@ -39,12 +39,18 @@ def reviews_form():
 @app.route("/reviews/<review_id>/", methods=["GET", "POST"])
 @login_required
 def reviews_modify(review_id):
-    r = Review.query.get(review_id)
+
+    re = Review.get_review_by_id(review_id)
 
     if request.method == "GET":
-        return render_template("reviews/modify.html", review = r)
+
+        return render_template("reviews/modify.html", review_id = review_id, author = re['author'], book = re['book'], review = re['review'], stars = re['stars']) 
+
+    r = Review.query.get(review_id)
 
     r.review = request.form.get("review")
+    r.stars = request.form.get("stars")
+    
     db.session().commit()
 
     return redirect(url_for("reviews_index"))
@@ -71,7 +77,7 @@ def reviews_create():
         db.session.commit()
 
     b = db.session.query(Book.id).filter(Book.book_name == given_book).scalar()
-    r = Review(b, form.review.data, form.star.data)
+    r = Review(b, form.review.data, form.stars.data)
     r.account_id = current_user.id
 
     db.session().add(r)

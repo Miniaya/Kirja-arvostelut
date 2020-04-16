@@ -14,8 +14,13 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('reviews_index') }} ">List own Reviews</a>
+          <li class="nav-item dropdown">
+            <a id="dropdown" class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">List...</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown">
+              <a class="dropdown-item" href="{{ url_for('reviews_index') }} ">own Reviews</a>
+              <a class="dropdown-item" href="#">must-read books</a>
+              <a class="dropdown-item" href="#">books I've read</a>
+            </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('reviews_form') }} ">Add a new Review</a>

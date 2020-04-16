@@ -18,7 +18,7 @@ class Review(Base):
         self.stars = stars
 
     @staticmethod
-    def get_review(id=1):
+    def get_review(id):
         stmt = text("SELECT Author.name, Book.book_name, Review.review, Review.stars, Account.username, Review.date_modified, Review.id "
                     "FROM Review LEFT JOIN Book ON Review.book_id = Book.id "
                     "LEFT JOIN Author ON Book.author_id = Author.id "
@@ -65,6 +65,21 @@ class Review(Base):
         for row in res:
             response.append({"author":row[0], "book":row[1], "review":row[2], "stars":row[3], "username":row[4], "date":row[5], "id":row[6]})
 
+        return response
+
+    @staticmethod
+    def get_review_by_id(id):
+        stmt = text("SELECT Author.name, Book.book_name, Review.review, Review.stars, Review.id "
+                    "FROM Review LEFT JOIN Book ON Review.book_id = Book.id "
+                    "LEFT JOIN Author ON Book.author_id = Author.id "
+                    "WHERE Review.id = :id "
+                    "GROUP BY Review.id, Author.name, Book.book_name "
+                    "ORDER BY Review.date_modified DESC").params(id = id)
+        res = db.engine.execute(stmt)
+        row = res.first()
+
+        response = {"author":row[0], "book":row[1], "review":row[2], "stars":row[3], "id":row[4]}
+        
         return response
 
 class Author(db.Model):
