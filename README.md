@@ -10,9 +10,10 @@ järjestyksessä niille annettujen arvosanojen perusteella. (Mahdollista myös l
 ### Toiminnallisuudet:
 - Uuden arvostelun lisääminen
 - Arvostelujen listaaminen
-- Kirjallisen arvostelun muokkaaminen
+- Arvostelun muokkaaminen (kirjallinen ja tähdet)
 - Listaus viimeisimmistä arvosteluista (kaikki käyttäjät)
 - Listaus omista arvosteluista
+- Arvostelujen hakeminen kirjailijan perusteella
 
 [Sovellus Herokussa](https://kirja-arvostelut.herokuapp.com/)
 
