@@ -14,6 +14,11 @@ kirjoittaa lukemilleen kirjoille arvosteluja ja antaa niille arvosanat ("tähdet
 - Arvostelujen hakeminen kirjailijan perusteella
 - Lista, johon voi lisätä kirjoja, joita on lukenut
 
+### Toteutettavissa olevat toiminnallisuudet:
+
+- TOP 5 kirjat, joilla on parhaat arvostelut
+- Lista kirjoista, joita tahtoisi lukea ja mahdollisuus merkitä se luetuksi
+
 [Sovellus Herokussa](https://kirja-arvostelut.herokuapp.com/)
 
 [Tietokantakaavio](https://github.com/Miniaya/Kirja-arvostelut/blob/master/documentation/tietokantakaavio(uusin).png)
