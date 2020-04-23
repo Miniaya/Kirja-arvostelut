@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div>
+    <form method="GET" action="{{ url_for('read_form') }}">
+        <input type="submit" class="btn btn-secondary" value="Add book to the list"/>
+    </form>
+</div>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Author</th>
+        <th scope="col">Book</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+            <tr>
+                <td>{{ book.author }}</td>
+                <td>{{ book.book }}</td>
+                <td>
+                    {% if book.review == None %}
+                        <div>
+                            <form method="GET" action="{{ url_for('reviews_form') }}">
+                                <input type="submit" class="btn btn-secondary" value="Write a review">
+                            </form>
+                        </div>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}

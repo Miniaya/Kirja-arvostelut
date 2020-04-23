@@ -1,0 +1,9 @@
+
+<div class="btn-group btn-group-sm" role="group" arial-label="Basic example">
+    <form method="POST" action="{{ url_for('read_set_read', book_id=book.id) }}">
+        <input type="submit" class="btn btn-secondary" value="Set as read"/>
+    </form>
+    <form method="POST" action="{{ url_for('read_delete', book_id=book.id) }}">
+      <input type="submit" class="btn btn-secondary" value="Delete from list"/>
+    </form>
+</div>

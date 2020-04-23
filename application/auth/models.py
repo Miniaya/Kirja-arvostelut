@@ -10,6 +10,7 @@ class User(Base):
     password = db.Column(db.String(16), nullable = False)
 
     reviews = db.relationship("Review", backref='account', lazy = True)
+    reads = db.relationship("MustReads", backref='account', lazy = True)
 
     def __init__(self, name, username, password):
         self.name = name

@@ -87,4 +87,11 @@ def reviews_create():
     db.session().add(r)
     db.session().commit()
 
+    if db.session.query(MustReads).filter(MustReads.book_id == b).scalar() is None:
+        mr = MustReads(b, True)
+        mr.account_id = current_user.id
+
+        db.session().add(mr)
+        db.session().commit()
+
     return redirect(url_for("reviews_index"))
