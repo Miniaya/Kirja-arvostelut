@@ -1,9 +1,10 @@
 from flask import redirect, render_template, request, url_for
 from flask_login import login_required, current_user
 
-from application import app, db
+from application import app, db, login_required, login_manager
 from application.reviews.models import Review, Author, Book
 from application.reviews.forms import ReviewForm, SearchForm
+from application.read.models import MustReads
 
 @app.route("/frontpage", methods=["GET"])
 def reviews_front():
@@ -24,7 +25,7 @@ def reviews_index():
     return render_template("reviews/list.html", show = 2, reviews = Review.get_review(current_user.id))
 
 @app.route("/reviews/delete/<review_id>", methods=["POST"])
-@login_required
+@login_required(role="NORMAL")
 def reviews_delete(review_id):
     Review.query.filter_by(id=review_id).delete()
     db.session.commit()
@@ -37,10 +38,13 @@ def reviews_form():
     return render_template("reviews/new.html", form = ReviewForm())
 
 @app.route("/reviews/<review_id>/", methods=["GET", "POST"])
-@login_required
+@login_required(role="NORMAL")
 def reviews_modify(review_id):
 
     re = Review.get_review_by_id(review_id)
+
+    if re['account_id'] != current_user.id:
+        return login_manager.unauthorized()
 
     if request.method == "GET":
 

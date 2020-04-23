@@ -27,3 +27,6 @@ class User(Base):
 
     def is_authenticated(self):
         return True
+
+    def roles(self):
+        return ["NORMAL"]
