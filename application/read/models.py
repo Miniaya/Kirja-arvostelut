@@ -22,7 +22,7 @@ class MustReads(db.Model):
                     "LEFT JOIN Author ON Book.author_id = Author.id "
                     "LEFT JOIN Review ON Mustreads.book_id = Review.book_id "
                     "WHERE Mustreads.read = :boolean AND Mustreads.account_id = :id "
-                    "GROUP BY Mustreads.book_id, Author.name, Book.book_name").params(boolean = boolean, id = id)
+                    "GROUP BY Mustreads.book_id, Author.name, Book.book_name, Review.id").params(boolean = boolean, id = id)
         res = db.engine.execute(stmt)
 
         response = []
