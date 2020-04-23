@@ -10,12 +10,12 @@ from application.read.forms import ReadForm
 @app.route("/mustread")
 @login_required
 def read_mustReads():
-    return render_template("read/mustread.html", books = MustReads.get_read(0, current_user.id))
+    return render_template("read/mustread.html", books = MustReads.get_read(False, current_user.id))
 
 @app.route("/readlist", methods=["GET"])
 @login_required
 def read_listRead():
-    return render_template("read/readlist.html", books = MustReads.get_read(1, current_user.id))
+    return render_template("read/readlist.html", books = MustReads.get_read(True, current_user.id))
 
 @app.route("/read/new/")
 @login_required
