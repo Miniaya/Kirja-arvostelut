@@ -12,4 +12,4 @@ Tavallisena käyttäjänä pystyn...
 
 - ...tarkastelemaan muiden kirjoittamia arvosteluja sovelluksen etusivulta. 
 
-- ...löytää arvosteluja kirjailijan nimen (tai nimen osan) perusteella.
+- ...löytämään arvosteluja kirjailijan nimen (tai nimen osan) perusteella.
