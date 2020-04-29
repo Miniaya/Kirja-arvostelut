@@ -97,6 +97,21 @@ class Review(Base):
         
         return response
 
+    @staticmethod
+    def ranking():
+        stmt = text("SELECT DISTINCT Author.name, Book.book_name, (SELECT AVG(R.stars) FROM Review R WHERE R.book_id = Review.book_id) "
+                    "FROM Review LEFT JOIN Book ON Review.book_id = Book.id "
+                    "LEFT JOIN Author ON Book.author_id = Author.id "
+                    "GROUP BY Review.id, Author.name, Book.book_name "
+                    "ORDER BY (SELECT AVG(R.stars) FROM Review R WHERE R.book_id = Review.book_id) DESC, Book.book_name LIMIT 5")
+        res = db.engine.execute(stmt)
+        
+        response = []
+        for row in res:
+            response.append({"author":row[0], "book":row[1], "stars":row[2]})
+
+        return response
+
 class Author(db.Model):
 
     __tablename__ = "author"

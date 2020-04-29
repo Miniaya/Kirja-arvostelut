@@ -3,64 +3,88 @@
 
 {% block body %}
   {% if show == 1 %}
-  <form method="POST" action="{{ url_for('reviews_search') }}">
-    <div class="form-group">
-      {{ wtf.form_field(form.author, class="form-control", placeholder="Filter by author") }}
-    </div>
-  </form>
+  <div class="container">
+    <form method="POST" action="{{ url_for('reviews_search') }}">
+      <div class="form-group">
+        {{ wtf.form_field(form.author, class="form-control", placeholder="Filter by author") }}
+      </div>
+    </form>
   </div>
   {% endif %}
-  <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-primary rounded box-shadow">
-    {% if show == 1 %}
-    <h3 class="mb-0 text-white lh-100">Results for search:</h3>
-    {% elif show == 2 %}
-    <h3 class="mb-0 text-white lh-100">Own reviews</h3>
-    {% elif show == 3 %}
-    <h3 class="mb-0 text-white lh-100">Recent reviews</h3>
+  <div class="row">
+    {% if show == 3 %}
+    <div class="col-md-3 order-md-2 mb-2">
+      <strong>Most Reviewed books</strong>
+    {% for book in books %}
+      <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action active">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ book.book }}</h5>
+            <small>{{ book.stars }} / 5</small>
+          </div>
+          <p class="mb-1"> by {{ book.author }}</p>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="col-md-8 order-md-1">
+    {% else %}
+    <div class="container">
     {% endif %}
-  </div>
-  {% if reviews is defined and reviews|length > 0 %}
-    {% for review in reviews %}
-    <div class="my-3 p-3 bg-white rounded box-shadow">
-      <div class="d-flex justify-content-between align-items-center w-10">
-        <h5 class="pb-2 mb-0">{{ review.author }}  -  {{ review.book }}</h5>
-        {% if show == 2 %}
-        <div class="btn-group btn-group-sm" role="group" arial-label="Basic example">
-          <form method="GET" action="{{ url_for('reviews_modify', review_id=review.id) }}">
-            <input type="submit" class="btn btn-secondary btn-sm" value="Modify"/>
-          </form>
-          <form method="POST" action="{{ url_for('reviews_delete', review_id=review.id) }}">
-            <input type="submit" class="btn btn-secondary btn-sm" value="Delete"/>
-          </form>
+      <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-primary rounded box-shadow">
+        {% if show == 1 %}
+        <div class="container">
+          <h3 class="mb-0 text-white lh-100">Results for search:</h3>
+          <small>found review(s)</small>
         </div>
+        {% elif show == 2 %}
+        <h3 class="mb-0 text-white lh-100">Own reviews</h3>
+        {% elif show == 3 %}
+        <h3 class="mb-0 text-white lh-100">Recent reviews</h3>
         {% endif %}
       </div>
-      <div class="media-body pb-3 mb-0 lh-125 border-top border-gary pt-3">
-        <p>{{ review.review }}</p>
-        {% if review.stars == 1 %}
-        <img class="mr-3" src="{{ url_for('static', filename='1.png') }}" alt="" width="125" height="25">
-        {% elif review.stars == 2 %}
-        <img class="mr-3" src="{{ url_for('static', filename='2.png') }}" alt="" width="125" height="25">
-        {% elif review.stars == 3 %}
-        <img class="mr-3" src="{{ url_for('static', filename='3.png') }}" alt="" width="125" height="25">
-        {% elif review.stars == 4 %}
-        <img class="mr-3" src="{{ url_for('static', filename='4.png') }}" alt="" width="125" height="25">
-        {% elif review.stars == 5 %}
-        <img class="mr-3" src="{{ url_for('static', filename='5.png') }}" alt="" width="125" height="25">
-        {% endif %}
-        <div class="d-flex justify-content-between align-items-center w-10">
-          <div>
-            <small class="d-block text-right">@{{ review.username }}</small>
+      {% if reviews is defined and reviews|length > 0 %}
+        {% for review in reviews %}
+        <div class="my-3 p-3 bg-white rounded box-shadow">
+          <div class="d-flex justify-content-between align-items-center w-10">
+            <h5 class="pb-2 mb-0">{{ review.author }}  -  {{ review.book }}</h5>
+            {% if show == 2 %}
+            <div class="btn-group btn-group-sm" role="group" arial-label="Basic example">
+              <form method="GET" action="{{ url_for('reviews_modify', review_id=review.id) }}">
+                <input type="submit" class="btn btn-secondary btn-sm" value="Modify"/>
+              </form>
+              <form method="POST" action="{{ url_for('reviews_delete', review_id=review.id) }}">
+                <input type="submit" class="btn btn-secondary btn-sm" value="Delete"/>
+              </form>
+            </div>
+            {% endif %}
           </div>
-          <div>
-            <small class="d-block text-left">{{ review.date }}</small>
+          <div class="media-body pb-3 mb-0 lh-125 border-top border-gary pt-3">
+            <p>{{ review.review }}</p>
+            {% if review.stars == 1 %}
+            <img class="mr-3" src="{{ url_for('static', filename='1.png') }}" alt="" width="125" height="25">
+            {% elif review.stars == 2 %}
+            <img class="mr-3" src="{{ url_for('static', filename='2.png') }}" alt="" width="125" height="25">
+            {% elif review.stars == 3 %}
+            <img class="mr-3" src="{{ url_for('static', filename='3.png') }}" alt="" width="125" height="25">
+            {% elif review.stars == 4 %}
+            <img class="mr-3" src="{{ url_for('static', filename='4.png') }}" alt="" width="125" height="25">
+            {% elif review.stars == 5 %}
+            <img class="mr-3" src="{{ url_for('static', filename='5.png') }}" alt="" width="125" height="25">
+            {% endif %}
+            <div class="d-flex justify-content-between align-items-center w-10">
+              <div>
+                <small class="d-block text-right">@{{ review.username }}</small>
+              </div>
+              <div>
+                <small class="d-block text-left">{{ review.date }}</small>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      {% endfor %}
+      {% else %}
+        <p>No reviews</p>
+      {% endif %}
     </div>
-    {% endfor %}
-  {% else %}
-    <p>No reviews</p>
-  {% endif %}
-
 {% endblock %}

@@ -22,6 +22,23 @@ def read_listRead():
 def read_form():
     return render_template("read/addtolist.html", form = ReadForm())
 
+@app.route("/read/delete/<read_id>", methods=["POST"])
+@login_required
+def read_delete(read_id):
+    MustReads.query.filter_by(read_id=id).delete()
+    db.session.commit()
+
+    return redirect(url_for("read_mustReads"))
+
+@app.route("/read/<read_id>", methods=["POST"])
+@login_required
+def read_set_read(read_id):
+    r = MustReads.query.get(read_id)
+    r.read = True
+    db.session.commit()
+
+    return redirect(url_for("read_listRead"))
+
 @app.route("/read/", methods=["POST"])
 @login_required
 def read_create():
@@ -44,7 +61,8 @@ def read_create():
         db.session.commit()
 
     b = db.session.query(Book.id).filter(Book.book_name == given_book).scalar()
-    r = MustReads(b, form.read.data)
+    r = MustReads(b)
+    r.read = form.read.data
     r.account_id = current_user.id
 
     db.session().add(r)
