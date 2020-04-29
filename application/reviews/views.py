@@ -8,16 +8,16 @@ from application.read.models import MustReads
 
 @app.route("/frontpage", methods=["GET"])
 def reviews_front():
-    return render_template("reviews/list.html", reviews = Review.get_all_reviews(), show = 3, books = Review.ranking())
+    return render_template("reviews/list.html", reviews = Review.get_all_reviews(), show = 3, books = Review.ranking(), users = Review.most_reviews())
 
 @app.route("/reviews/search", methods=["POST", "GET"])
 def reviews_search():
     if request.method == "GET":
-        return render_template("reviews/list.html", show = 1, form = SearchForm(), books = Review.ranking())
+        return render_template("reviews/list.html", show = 1, form = SearchForm())
 
     r = Review.find_by_author(request.form.get("author"))
 
-    return render_template("reviews/list.html", show = 1, reviews = r, form = SearchForm(), books = Review.ranking())
+    return render_template("reviews/list.html", show = 1, reviews = r, form = SearchForm())
 
 @app.route("/reviews", methods=["GET"])
 @login_required

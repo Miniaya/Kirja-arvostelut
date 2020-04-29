@@ -13,21 +13,34 @@
   {% endif %}
   <div class="row">
     {% if show == 3 %}
-    <div class="col-md-3 order-md-2 mb-2">
-      <strong>Most Reviewed books</strong>
-    {% for book in books %}
-      <div class="list-group">
-        <a href="#" class="list-group-item list-group-item-action active">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">{{ book.book }}</h5>
-            <small>{{ book.stars }} / 5</small>
-          </div>
-          <p class="mb-1"> by {{ book.author }}</p>
-        </a>
-      </div>
-      {% endfor %}
+    <div class="col-md-3 order-md-1 mb-2">
+      <strong>Users with most reviews</strong>
+        <div class="list-group">
+          {% for user in users %}
+            <a class="list-group-item">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{ user.user }}</h5>
+              </div>
+              <p class="mb-1">{{ user.count }} reviews</p>
+            </a>
+          {% endfor %}
+        </div>
     </div>
-    <div class="col-md-8 order-md-1">
+    <div class="col-md-3 order-md-3 mb-2">
+      <strong>Most Reviewed books</strong>
+        <div class="list-group">
+          {% for book in books %}
+            <a href="#" class="list-group-item list-group-item-action">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{ book.book }}</h5>
+                <small>{{ book.stars }} / 5</small>
+              </div>
+              <p class="mb-1"> by {{ book.author }}</p>
+            </a>
+          {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-6 order-md-2">
     {% else %}
     <div class="container">
     {% endif %}

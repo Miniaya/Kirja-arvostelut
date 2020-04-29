@@ -112,6 +112,20 @@ class Review(Base):
 
         return response
 
+    @staticmethod
+    def most_reviews():
+        stmt = text("SELECT DISTINCT Account.username, (SELECT COUNT(id) FROM Review WHERE account_id = Account.id) "
+                    "FROM Account LEFT JOIN Review ON Review.account_id = Account.id "
+                    "GROUP BY Account.id, Review.id "
+                    "ORDER BY (SELECT COUNT(id) FROM Review WHERE account_id = Account.id) DESC LIMIT 5")
+        res = db.engine.execute(stmt)
+
+        response = []
+        for row in res:
+            response.append({"user":row[0], "count":row[1]})
+
+        return response
+
 class Author(db.Model):
 
     __tablename__ = "author"
