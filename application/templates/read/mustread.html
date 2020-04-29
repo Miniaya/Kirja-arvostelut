@@ -2,37 +2,50 @@
 
 {% block body %}
 
-<div>
-  <form method="GET" action="{{ url_for('read_form') }}">
-      <input type="submit" class="btn btn-secondary" value="Add book to the list"/>
-  </form>
-</div>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Author</th>
-      <th scope="col">Book</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-      {% for book in books %}
-          <tr>
+<div class="container">
+  <div class="d-flex justify-content-between align-items-center w-10">
+    <div>
+      <h1 class="d-block text-right">Books I must read</h1>
+    </div>
+    <div>
+        <form method="GET" action="{{ url_for('read_form') }}">
+            <input type="submit" class="btn btn-secondary" value="Add book to the list"/>
+        </form>
+    </div>
+  </div>
+  <table class="table table-borderless">
+    <thead>
+      <tr class="bg-primary">
+        <th class="mb-0 text-white lh-100" scope="col">Author</th>
+        <th class="mb-0 text-white lh-100" scope="col">Book</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if books|length == 0 %}
+      <tr>
+        <td>You have no books to read</td>
+      </tr>
+      {% else %}
+        {% for book in books %}
+            <tr>
               <td>{{ book.author }}</td>
               <td>{{ book.book }}</td>
               <td>
                 <div class="btn-group btn-group-sm" role="group" arial-label="Basic example">
                   <form method="POST" action="{{ url_for('read_set_read', read_id=book.id) }}">
-                      <input type="submit" class="btn btn-secondary" value="Set as read"/>
+                    <input type="submit" class="btn btn-secondary" value="Set as read"/>
                   </form>
                   <form method="POST" action="{{ url_for('read_delete', read_id=book.id) }}">
                     <input type="submit" class="btn btn-secondary" value="Delete from list"/>
                   </form>
                 </div>
-              </td>
-          </tr>
-      {% endfor %}
-  </tbody>
-</table>
+             </td>
+            </tr>
+          {% endfor %}
+        {% endif %}
+      </tbody>
+    </table>
+</div>
 
 {% endblock %}

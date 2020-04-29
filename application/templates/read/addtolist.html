@@ -3,7 +3,8 @@
 
 {% block body %}
 
-<form method="POST" action="{{ url_for('read_create') }}">
+<div class="container">
+  <form method="POST" action="{{ url_for('read_create') }}">
     <div class="form-group">
       {{ wtf.form_field(form.author, class="form-control", placeholder="Author") }}
     </div>
@@ -14,6 +15,7 @@
         {{ wtf.form_field(form.read, class="form-check-input")}}
     </div>
     <input type="submit" class="btn btn-primary" value="Add to list" />
-</form>
+  </form>
+</div>
 
 {% endblock %}

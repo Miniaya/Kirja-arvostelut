@@ -13,36 +13,38 @@
 </form>
 -->
 
-<form method="POST" action="{{ url_for('reviews_modify', review_id = review_id) }}">
-  <fieldset disabled>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="author">Author</label>
-        <input class="form-control" id="author" type="text" placeholder="{{ author }}" readonly>
+<div class="container">
+  <form method="POST" action="{{ url_for('reviews_modify', review_id = review_id) }}">
+    <fieldset disabled>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="author">Author</label>
+          <input class="form-control" id="author" type="text" placeholder="{{ author }}" readonly>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="book">Book name</label>
+          <input class="form-control" id="book" type="text" placeholder="{{ book }}" readonly>
+        </div>
       </div>
-      <div class="form-group col-md-6">
-        <label for="book">Book name</label>
-        <input class="form-control" id="book" type="text" placeholder="{{ book }}" readonly>
-      </div>
+    </fieldset>
+    <div class="form-group">
+      <label for="review">Review</label>
+      <textarea class="form-control" id="review" name="review" rows="4" cols="50">{{ review }}</textarea>
     </div>
-  </fieldset>
-  <div class="form-group">
-    <label for="review">Review</label>
-    <textarea class="form-control" id="review" name="review" rows="4" cols="50">{{ review }}</textarea>
-  </div>
-  <figcaption id="charactersRemaining" class="figure-caption text-right">400</figcaption>
-  <div class="form-group">
-    <label for="stars">Stars</label>
-    <select class="form-control" name="stars" id="stars">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-    </select>
-  </div>
-  <input type="submit" class="btn btn-primary" value="Save" />
-</form>
-<script src="{{url_for('static', filename='textcounter.js')}}"></script>
+    <figcaption id="charactersRemaining" class="figure-caption text-right">400</figcaption>
+    <div class="form-group">
+      <label for="stars">Stars</label>
+      <select class="form-control" name="stars" id="stars">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Save" />
+  </form>
+  <script src="{{url_for('static', filename='textcounter.js')}}"></script>
+</div>
 
   {% endblock %}

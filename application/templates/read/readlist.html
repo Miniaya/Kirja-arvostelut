@@ -2,36 +2,49 @@
 
 {% block body %}
 
-<div>
-    <form method="GET" action="{{ url_for('read_form') }}">
-        <input type="submit" class="btn btn-secondary" value="Add book to the list"/>
-    </form>
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center w-10">
+        <div>
+          <h1 class="d-block text-right">Books I've read</h1>
+        </div>
+        <div>
+            <form method="GET" action="{{ url_for('read_form') }}">
+                <input type="submit" class="btn btn-secondary" value="Add book to the list"/>
+            </form>
+        </div>
+    </div>
+    <table class="table table-borderless">
+        <thead>
+        <tr class="bg-primary">
+            <th class="mb-0 text-white lh-100" scope="col">Author</th>
+            <th class="mb-0 text-white lh-100" scope="col">Book</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+            {% if books|length == 0 %}
+                <tr>
+                    <td>You haven't read any books yet</td>
+                </tr>
+            {% else %}
+                {% for book in books %}
+                <tr>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.book }}</td>
+                    <td>
+                        {% if book.review == None %}
+                            <div>
+                                <form method="GET" action="{{ url_for('reviews_form') }}">
+                                    <input type="submit" class="btn btn-secondary" value="Write a review">
+                                </form>
+                            </div>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
 </div>
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Author</th>
-        <th scope="col">Book</th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-        {% for book in books %}
-            <tr>
-                <td>{{ book.author }}</td>
-                <td>{{ book.book }}</td>
-                <td>
-                    {% if book.review == None %}
-                        <div>
-                            <form method="GET" action="{{ url_for('reviews_form') }}">
-                                <input type="submit" class="btn btn-secondary" value="Write a review">
-                            </form>
-                        </div>
-                    {% endif %}
-                </td>
-            </tr>
-        {% endfor %}
-    </tbody>
-  </table>
 
 {% endblock %}
