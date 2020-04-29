@@ -10,12 +10,12 @@ from application.read.forms import ReadForm
 @app.route("/mustread")
 @login_required
 def read_mustReads():
-    return render_template("read/mustread.html", books = MustReads.get_read(False, current_user.id))
+    return render_template("read/mustread.html", books = MustReads.get_read(False, current_user.id), read = False)
 
 @app.route("/readlist", methods=["GET"])
 @login_required
 def read_listRead():
-    return render_template("read/readlist.html", books = MustReads.get_read(True, current_user.id))
+    return render_template("read/readlist.html", books = MustReads.get_read(True, current_user.id), read = True)
 
 @app.route("/read/new/")
 @login_required
@@ -25,10 +25,14 @@ def read_form():
 @app.route("/read/delete/<read_id>", methods=["POST"])
 @login_required
 def read_delete(read_id):
-    MustReads.query.filter_by(read_id=id).delete()
+    read = MustReads.query.get(read_id).read
+    MustReads.query.filter_by(id=read_id).delete()
     db.session.commit()
 
-    return redirect(url_for("read_mustReads"))
+    if read == 1:
+        return redirect(url_for("read_listRead"))
+    else:
+        return redirect(url_for("read_mustReads"))
 
 @app.route("/read/<read_id>", methods=["POST"])
 @login_required

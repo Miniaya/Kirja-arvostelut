@@ -3,7 +3,6 @@
 
 {% block body %}
 
-{{ error }}
 <div class="container">
     <form method = "POST" action = "{{ url_for('auth_login') }}" >
         <div>
@@ -12,7 +11,10 @@
         <div>
             {{ wtf.form_field(form.password, class="form-control") }}
         </div>
-        <input type = "submit" class="btn btn-primary" value = "Login" />
+        {{ error }}
+        <div>
+            <input type = "submit" class="btn btn-primary" value = "Login" />
+        </div>
     </form>
 </div>
 

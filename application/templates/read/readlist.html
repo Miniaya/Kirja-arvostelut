@@ -32,13 +32,16 @@
                     <td>{{ book.author }}</td>
                     <td>{{ book.book }}</td>
                     <td>
-                        {% if book.review == None %}
-                            <div>
+                        <div class="btn-group btn-group-sm" role="group" arial-label="Basic example">
+                            {% if book.review == None %}
                                 <form method="GET" action="{{ url_for('reviews_form') }}">
                                     <input type="submit" class="btn btn-secondary" value="Write a review">
                                 </form>
-                            </div>
-                        {% endif %}
+                            {% endif %}
+                            <form method="POST" action="{{ url_for('read_delete', read_id=book.id) }}">
+                                <input type="submit" class="btn btn-secondary" value="Delete from list"/>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 {% endfor %}

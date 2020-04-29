@@ -85,7 +85,6 @@ def reviews_create():
     r.account_id = current_user.id
 
     db.session().add(r)
-    db.session().commit()
 
     if db.session.query(MustReads).filter(MustReads.book_id == b).scalar() is None:
         mr = MustReads(b)
