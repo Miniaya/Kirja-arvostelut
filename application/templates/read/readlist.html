@@ -34,7 +34,7 @@
                     <td>
                         <div class="btn-group btn-group-sm" role="group" arial-label="Basic example">
                             {% if book.review == None %}
-                                <form method="GET" action="{{ url_for('reviews_form') }}">
+                                <form method="GET" action="{{ url_for('read_review', book_id = book.book_id) }}">
                                     <input type="submit" class="btn btn-secondary" value="Write a review">
                                 </form>
                             {% endif %}

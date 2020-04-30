@@ -7,6 +7,20 @@ from application.reviews.models import Author, Book, Review
 from application.read.models import MustReads
 from application.read.forms import ReadForm
 
+from application.reviews.forms import ReviewForm
+
+@app.route("/read/review/<book_id>", methods=["GET"])
+@login_required
+def read_review(book_id):
+    b = Book.get_book(book_id)
+
+    form = ReviewForm()
+
+    form.author.data = b['author']
+    form.name.data = b['book']
+
+    return render_template("reviews/new.html", form = form, readonly = True)
+
 @app.route("/mustread")
 @login_required
 def read_mustReads():

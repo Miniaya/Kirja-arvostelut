@@ -17,7 +17,7 @@ class MustReads(Base):
 
     @staticmethod
     def get_read(boolean, id):
-        stmt = text("SELECT Mustreads.id, Author.name, Book.book_name, Review.id "
+        stmt = text("SELECT Mustreads.id, Author.name, Book.book_name, Review.id, Mustreads.book_id "
                     "FROM Mustreads LEFT JOIN Book ON Mustreads.book_id = Book.id "
                     "LEFT JOIN Author ON Book.author_id = Author.id "
                     "LEFT JOIN Review ON Mustreads.book_id = Review.book_id "
@@ -27,6 +27,6 @@ class MustReads(Base):
 
         response = []
         for row in res:
-            response.append({"id":row[0], "author":row[1], "book":row[2], "review":row[3]})
+            response.append({"id":row[0], "author":row[1], "book":row[2], "review":row[3], "book_id":row[4]})
 
         return response

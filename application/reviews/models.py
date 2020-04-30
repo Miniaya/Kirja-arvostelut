@@ -152,3 +152,17 @@ class Book(db.Model):
     def __init__(self, name, author_id):
         self.book_name = name
         self.author_id = author_id
+
+    @staticmethod
+    def get_book(id):
+        stmt = text("SELECT Author.name, Book.book_name "
+                    "FROM Book LEFT JOIN Author ON Book.author_id = Author.id "
+                    "WHERE Book.id = :id").params(id = id)
+        res = db.engine.execute(stmt)
+        row = res.first()
+
+        response = {"author":row[0], "book":row[1]}
+
+        return response
+
+

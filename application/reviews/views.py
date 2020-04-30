@@ -35,7 +35,7 @@ def reviews_delete(review_id):
 @app.route("/reviews/new/")
 @login_required
 def reviews_form():
-    return render_template("reviews/new.html", form = ReviewForm())
+    return render_template("reviews/new.html", form = ReviewForm(), readonly = False)
 
 @app.route("/reviews/<review_id>/", methods=["GET", "POST"])
 @login_required(role="NORMAL")
@@ -48,12 +48,23 @@ def reviews_modify(review_id):
 
     if request.method == "GET":
 
-        return render_template("reviews/modify.html", review_id = review_id, author = re['author'], book = re['book'], review = re['review'], stars = re['stars']) 
+        form = ReviewForm(stars=re['stars'])
 
+        form.author.data = re['author']
+        form.name.data = re['book']
+        form.review.data = re['review']
+
+        return render_template("reviews/modify.html", form = form, review_id = review_id) 
+
+    form = ReviewForm(request.form)
+
+    if not form.validate():
+        return render_template("reviews/modify.html", form = form)
+    
     r = Review.query.get(review_id)
 
-    r.review = request.form.get("review")
-    r.stars = request.form.get("stars")
+    r.review = form.review.data
+    r.stars = form.stars.data
     
     db.session().commit()
 
@@ -92,6 +103,7 @@ def reviews_create():
         mr.account_id = current_user.id
 
         db.session().add(mr)
-        db.session().commit()
+        
+    db.session().commit()
 
     return redirect(url_for("reviews_index"))
