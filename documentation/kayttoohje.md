@@ -20,11 +20,9 @@ Rekisteröityminen sovellukseen tapahtuu sivun oikeasta laidasta painamalla navi
 
 Rekisteröitymisen jälkeen sovellus kirjaa käyttäjän automaattisesti sisään. Mikäli käyttäjä on jo aiemmin rekisteröitynyt sovellukseen, *Login* -painike löytyy navigointipalkin oikeasta laidasta *Sign in* -painikkeen vasemmalta puolelta. Kun käyttäjä on kirjautunut sisään, uloskirjautuminen tapahtuu samasta paikasta, painikkeesta *Hello [käyttäjän koko nimi] -- Logout*.
 
-## Sovelluksen perustoiminnallisuudet
-
 ### Kaikkien arvostelujen listaaminen
 
-Kaikkien käyttäjien arvostelut saa näkyviin, kun painaa navigointipalkin vasemassa reunassa olevaa *Book Reviews* -painiketta. Näkymässä vasemmalla on listattu viisi käyttäjää, joilla on sovelluksessa eniten arvosteluja ja oikealla viisi kirjaa, jotka ovat saaneet parhaat arvostelut.
+Kaikkien käyttäjien arvostelut saa näkyviin, kun painaa navigointipalkin vasemassa reunassa olevaa *Book Reviews* -painiketta. Näkymässä vasemmalla on listattu viisi käyttäjää, joilla on sovelluksessa eniten arvosteluja ja oikealla viisi kirjaa, jotka ovat saaneet parhaat arvostelut. Sivu on näkyvissä myös niille käyttäjille, jotka eivät ole kirjautuneet sovellukseen.
 
 ### Omien arvostelujen listaaminen
 
@@ -36,7 +34,7 @@ Luetut kirjat löytyvät samasta pudostuvalikosta painamalla *books I've read* -
 
 ### Luettavien kirjojen listaaminen
 
-Luettavat kirjat löytyvät niin ikään *List...* -pudotusvalikosta painamalla *must-read books* -painiketta. Näkymässä on lista kirjoista, jotka käyttäjä on 
+Luettavat kirjat löytyvät niin ikään *List...* -pudotusvalikosta painamalla *must-read books* -painiketta. Näkymässä on lista kirjoista, jotka käyttäjä on merkinnyt sellaisiksi, jotka haluaa lukea. Kirjan vieressä on painike, josta kirjan saa siirrettyä luettujen kirjojen listalle.
 
 ### Uuden arvostelun lisääminen
 
@@ -44,4 +42,4 @@ Uuden arvostelun lisääminen onnistuu painamalla navigointipalkin *add a new re
 
 ### Hakutoiminnallisuus
 
-Kirjojen arvosteluja on mahdollista hakea, kun painaa navigointipalkin *Discover* -painiketta. Haku onnistuu kirjailijan nimellä tai sen osalla.
+Kirjojen arvosteluja on mahdollista hakea, kun painaa navigointipalkin *Discover* -painiketta. Haku onnistuu kirjailijan nimellä tai sen osalla. Hakutoiminnallisuutta voi käyttää myös silloin, kun ei ole kirjautunut sisään.
