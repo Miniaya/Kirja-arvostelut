@@ -1,5 +1,15 @@
 # Käyttöohje
 
+## Asennusohje
+
+### Paikallisesti
+
+Sovelluksessa on käytössä funkioita, jotka toimivat vain postgresql-tietokantajärjestelmässä (ei siis sqlitessä). Mikäli sovelluksen haluaa saada toimimaan paikallisesti, täytyy `application/__init__.py` vaihtaa paikallisesti käytettävä tietokantajärjestelmä tai poistaa tietokantakyselyistä funktiot, jotka toimivat vain postgresqlssä. Näitä funktioita ovat `application/models.py` sarakkeiden luonnissa käytetyt *db.func.current_timestamp(0)* ja `application/reviews/model.py` metodin *get_review_by_book_id(id)* sisältämät *TRUNC()*. Sovellus toimii sqlitessä, mikäli ensimmäisistä funktioista poistaa nollat, ja jälkimmäisen funktion poistaa kyselyistä kokonaan.
+
+### Pilvessä / Herokussa
+
+Herokussa on käytössä postgresql, ja sovellus tietää, koska olemme Herokun ympäristössä. Se siis ei tarvitse mitään sen kummallisempia kikkailuja toimiakseen.
+
 ### Rekisteröityminen
 
 Rekisteröityminen sovellukseen tapahtuu sivun oikeasta laidasta painamalla navigointipalkin *Sign in* -painiketta.
