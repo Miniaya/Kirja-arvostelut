@@ -99,11 +99,11 @@ class Review(Base):
 
     @staticmethod
     def ranking():
-        stmt = text("SELECT DISTINCT Author.name, Book.book_name, (SELECT TRUNC(AVG(R.stars)) FROM Review R WHERE R.book_id = Review.book_id) "
+        stmt = text("SELECT DISTINCT Author.name, Book.book_name, (SELECT TRUNC(AVG(R.stars), 1) FROM Review R WHERE R.book_id = Review.book_id) "
                     "FROM Review LEFT JOIN Book ON Review.book_id = Book.id "
                     "LEFT JOIN Author ON Book.author_id = Author.id "
                     "GROUP BY Review.id, Author.name, Book.book_name "
-                    "ORDER BY (SELECT TRUNC(AVG(R.stars)) FROM Review R WHERE R.book_id = Review.book_id) DESC, Book.book_name LIMIT 5")
+                    "ORDER BY (SELECT TRUNC(AVG(R.stars), 1) FROM Review R WHERE R.book_id = Review.book_id) DESC, Book.book_name LIMIT 5")
         res = db.engine.execute(stmt)
         
         response = []
