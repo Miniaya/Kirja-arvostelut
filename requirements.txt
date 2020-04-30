@@ -12,7 +12,6 @@ backports.functools-lru-cache==1.4
 backports.shutil-get-terminal-size==1.0.0
 beautifulsoup4==4.6.0
 biopython==1.70
-BitTornado===T-0.3.18.-BitTornado-
 bleach==3.1.4
 blinker==1.4
 bzr==2.8.0.dev1
