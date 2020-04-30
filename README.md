@@ -5,21 +5,11 @@ Kirja-arvostelut
 Sovellus, johon käyttäjä voi kirjautua, lisätä listalle lukemiaan kirjoja (mahdollisesti myös kirjoja, jotka haluaa lukea),
 kirjoittaa lukemilleen kirjoille arvosteluja ja antaa niille arvosanat ("tähdet") 1 - 5. Myös mahdollisuus hakea sovellukseen lisättyjä kirjoja ja niiden arvosteluja. Mahdollisuus poistaa luettuja kirjoja ja niiden arvosteluja. Kirjojen ranking-lista, kirjat on järjestyksessä niille annettujen arvosanojen perusteella. (Mahdollista myös lisätä muiden arvostelemia kirjoja omalle lukulistalle.)
 
-### Jo toteutetut toiminnallisuudet:
-
-- Uuden arvostelun lisääminen
-- Arvostelun muokkaaminen (kirjallinen ja tähdet)
-- Listaus viimeisimmistä arvosteluista (kaikki käyttäjät)
-- Listaus omista arvosteluista
-- Arvostelujen hakeminen kirjailijan perusteella
-- Lista, johon voi lisätä kirjoja, joita on lukenut
-
-### Toteutettavissa olevat toiminnallisuudet:
-
-- TOP 5 kirjat, joilla on parhaat arvostelut
-- Lista kirjoista, joita tahtoisi lukea ja mahdollisuus merkitä se luetuksi
+[Vaatimusmäärittely]()
 
 [Sovellus Herokussa](https://kirja-arvostelut.herokuapp.com/)
+
+[Käyttöohje](https://github.com/Miniaya/Kirja-arvostelut/blob/master/documentation/kayttoohje.md)
 
 [Tietokantakaavio](https://github.com/Miniaya/Kirja-arvostelut/blob/master/documentation/tietokantakaavio(uusin).png)
 
