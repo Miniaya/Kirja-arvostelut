@@ -56,7 +56,7 @@ class Review(Base):
                     "FROM Review LEFT JOIN Book ON Review.book_id = Book.id "
                     "LEFT JOIN Author ON Book.author_id = Author.id "
                     "LEFT JOIN Account ON Review.account_id = Account.id "
-                    "WHERE LOWER(Author.name) LIKE :auth "
+                    "WHERE LOWER(Author.name) LIKE LOWER(:auth) "
                     "GROUP BY Review.id, Author.name, Book.book_name, Account.username "
                     "ORDER BY Review.date_modified DESC").params(auth = '%' + auth + '%')
         res = db.engine.execute(stmt)
@@ -99,7 +99,7 @@ class Review(Base):
 
     @staticmethod
     def ranking():
-        stmt = text("SELECT DISTINCT Author.name, Book.book_name, (SELECT AVG(R.stars) FROM Review R WHERE R.book_id = Review.book_id) "
+        stmt = text("SELECT DISTINCT Author.name, Book.book_name, (SELECT TRUNC(AVG(R.stars)) FROM Review R WHERE R.book_id = Review.book_id) "
                     "FROM Review LEFT JOIN Book ON Review.book_id = Book.id "
                     "LEFT JOIN Author ON Book.author_id = Author.id "
                     "GROUP BY Review.id, Author.name, Book.book_name "
