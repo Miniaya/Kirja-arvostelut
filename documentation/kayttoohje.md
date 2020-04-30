@@ -10,6 +10,8 @@ Sovelluksessa on käytössä funkioita, jotka toimivat vain postgresql-tietokant
 
 Herokussa on käytössä postgresql, ja sovellus tietää, koska olemme Herokun ympäristössä. Se siis ei tarvitse mitään sen kummallisempia kikkailuja toimiakseen.
 
+## Sovelluksen toiminnallisuudet
+
 ### Rekisteröityminen
 
 Rekisteröityminen sovellukseen tapahtuu sivun oikeasta laidasta painamalla navigointipalkin *Sign in* -painiketta.
